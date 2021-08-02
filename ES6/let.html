@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 声明变量
+    let a;
+    let b,c,d;
+    let e = 100;
+    let f = 521, g='www';
+
+    // 1.变量不能重复声明
+    /* let s = 'a';
+    let s = 'b'; */
+
+    // 2.块级作用域 全局、函数、eval
+    /* { // 包括 if else while for
+        let girl = 'xiaoming';
+        
+    } 
+    console.log(girl);*/
+
+    // 3.不存在变量提升
+    /* var song;
+    console.log(song); // 输出undefined，并不会报错。而let就不可以，必须先声明，才能使用变量。
+    
+    */
+    /* console.log(song); Cannot access 'song' before initialization
+    let song = 'aaa'; */
+    
+    // 4.不影响作用域链
+    {
+        let school = 'qinghua';
+        function a() {
+            console.log(school);
+        }
+        a();
+    }
+    
+    </script>
+</body>
+</html>
