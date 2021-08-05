@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <script>
+        // 1.数组的合并
+        const arr = ['a','b'];
+        const arr1 = ['c','d'];
+
+        const arr2 = arr.concat(arr1);
+
+        console.log(arr2);
+
+        const arr3 = [...arr,...arr1];
+        console.log(arr3);
+
+        // 2.数组的克隆
+        const b = ['1','2','3'];
+        const c = [...b];
+        console.log(c);
+
+        // 3.将伪数组转为正的数组
+        const divs = document.querySelectorAll("div");
+        const ab = [...divs];
+        console.log(ab);
+    </script>
+</body>
+</html>
