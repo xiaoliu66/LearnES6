@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 生成器其实就是一个特殊的函数
+        // 异步编程  纯回调函数   node fs ajax mongodb
+        function *get() {
+            // yield 作为生成器函数的分隔符
+            console.log("11111");
+            yield 'a';
+            console.log("22222");
+            yield 'b';
+            console.log("33333");
+            yield 'c';
+            console.log('44444');
+        }
+
+        let iterator = get();
+        // console.log(iterator);
+        // 生成器函数 调用
+       /*  iterator.next();
+        iterator.next();
+        iterator.next();
+        iterator.next(); */
+
+
+        for(let v of get()) {
+            console.log(v);
+        }
+    </script>
+</body>
+</html>
