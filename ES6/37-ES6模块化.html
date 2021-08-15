@@ -10,17 +10,35 @@
     <script type="module">
         // 要用live server 插件打开
 
+        // 1. 模块通用的导入方式
         // 引入m1.js 模块内容
-        import * as m1 from "./m1.js"
-        console.log(m1);
+        /* import * as m1 from "./m1.js"
+        console.log(m1); */
 
         // 引入m2.js 模块内容
-        import * as m2 from "./m2.js"
-        console.log(m2);
+       /*  import * as m2 from "./m2.js"
+        console.log(m2); */
 
         // 引入m3.js 模块内容
-        import * as m3 from "./m3.js"
+        /* import * as m3 from "./m3.js"
+        console.log(m3); */
+
+        // 2.解构赋值形式导入模块
+        // import {school,teach} from "./m1.js"
+        // import {school as s,findJob} from "./m2.js"
+        // import {default as m3} from "./m3.js"
+        /* console.log(school);
+        console.log(teach); */
+
+        /* console.log(s);
+        console.log(findJob); */
+
+        // console.log(m3);
+
+        // 3.简便形式导入只针对默认暴露
+        import m3 from "./m3.js"
         console.log(m3);
+
     </script>
 </body>
 </html>
