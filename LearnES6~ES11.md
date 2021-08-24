@@ -38,5 +38,55 @@
 </html>
 ```
 
+### 解构赋值
 
+ES6允许按照一定模式从**数组**和**对象**中**提取值**，对变量进行**赋值**。这被称为**解构赋值**。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            ES6允许按照一定模式从数组和对象中提取值，对变量进行赋值。这被称为解构赋值。
+            不仅仅只是数组、对象，还有字符串、数值和布尔值，详情请看es6入门 https://es6.ruanyifeng.com/
+        */
+        // 1.数组的结构
+        /* const F4 = ['小沈阳','刘能','赵四','宋小宝'];
+        let [xiao,liu,zhao,song] = F4;
+        console.log(xiao);
+        console.log(zhao);
+        console.log(liu);
+        console.log(song); */
+
+        // 2.对象解构赋值
+        /* 
+            对象的解构与数组有一个重要的不同。
+            数组的元素是按次序排列的，变量的取值由它的位置决定；
+            而对象的属性没有次序，变量必须与属性同名，才能取到正确的值。
+        */
+        const zhao = {
+            name: '赵本山',
+            age: 65,
+            xiaopin: function () {
+                console.log('演小品');
+            }
+        }
+
+        let {name,age,z} = zhao;
+        console.log(name);
+        console.log(age);
+        console.log(z);
+        
+        z();
+    </script>
+</body>
+</html>
+```
 
