@@ -126,3 +126,46 @@ ES6允许按照一定模式从**数组**和**对象**中**提取值**，对变�
 </html>
 ```
 
+### 对象的简化写法
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // es6允许在大括号里面，直接写入变量和函数，作为对象的属性和方法。
+        let name = 'zhangsan';
+        let change = function () {
+            console.log('哈哈哈');
+        }
+
+        // 完整写法
+        /* const school = {
+            name: name,
+            change: change,
+            improve: function () {
+                console.log('提高');
+            }
+        } */
+
+        // 简化写法
+        const school = {
+            name,
+            change,
+            improve() {
+                console.log('提高');
+            }
+        }
+
+        console.log(school);
+    </script>
+</body>
+</html>
+```
+
