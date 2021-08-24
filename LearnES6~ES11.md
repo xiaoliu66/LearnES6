@@ -90,3 +90,39 @@ ES6允许按照一定模式从**数组**和**对象**中**提取值**，对变�
 </html>
 ```
 
+### 模板字符串
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // es6 引入新的声明字符串的方式【``】
+        // 1.声明
+        let str = `我是一个字符串`;
+        console.log(str);
+
+        // 2.内容中可以直接出现换行符
+        let str1 = `
+            <ul>
+                <li>1</li>    
+                <li>2</li>    
+                <li>3</li>    
+            </ul>
+        `;
+
+        // 3. 变量拼接
+        let food = '牛肉';
+        let out = `我喜欢吃${food}`;
+        console.log(out);
+    </script>
+</body>
+</html>
+```
+
