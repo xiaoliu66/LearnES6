@@ -245,3 +245,69 @@ ES6允许按照一定模式从**数组**和**对象**中**提取值**，对变�
 </html>
 ```
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>箭头函数的实践</title>
+    <style lang="">
+        div {
+            width: 200px;
+            height: 200px;
+            background: #58a;
+        }
+    </style>
+</head>
+<body>
+    <div id = 'root'></div>
+
+    <script>
+        // 1) 点击区域2s后背景颜色发生改变
+        let app = document.getElementById("root");
+        // 绑定事件
+        app.addEventListener("click", function() {
+            // 保存this的值
+            /* let self= this;
+
+            setTimeout(() => {
+                self.style.background = 'pink';
+            }, 2000); */
+
+            // 是用箭头函数
+            setTimeout(() => {
+                // 此处的this是指向事件源的
+                this.style.background = 'pink';
+            }, 2000);
+        })
+
+        // 2) 获取数组中偶数元素
+        let arr = [1,2,3,4,5,6];
+        /* let result = arr.filter(function(item) {
+            if (item % 2 == 0) {
+                return true;
+            }
+            return false;
+        }); */
+
+        let result = arr.filter(item => item % 2 === 0)
+        console.log(result);
+
+        /* 
+            箭头函数适合与this无关的回调，定时器、数组的方法回调。
+            箭头函数不适合与this有关的回调，事件回调,对象的方法。
+        */
+
+        {
+            name: '小明',
+            getName () => {
+                this.name // 此时this指向window
+            },
+        }
+    </script>
+</body>
+</html>
+```
+
