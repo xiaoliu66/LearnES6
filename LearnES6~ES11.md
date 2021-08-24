@@ -169,3 +169,79 @@ ES6允许按照一定模式从**数组**和**对象**中**提取值**，对变�
 </html>
 ```
 
+### 箭头函数
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 声明一个函数
+        /* let fn = function () {
+            
+        } */
+
+        /* let fn = (a,b) => {
+            return  a+b;
+        }
+        let sum = fn(2,3);
+        console.log(sum); */
+
+        // 1.this是静态的，this始终指向函数声明时所在作用域下的this的值
+        function getName() {
+            console.log(this.name);
+        }
+        let getName2 = ()=>{
+            console.log(this.name);
+        }
+
+        window.name = 'xiaoming';
+        const school = {
+            name: '家里蹲'
+        }
+
+        // 直接调用
+        getName();
+        getName2();
+
+        // call方法调用
+        getName.call(school);
+        getName2.call(school);
+
+        // 2.不能作为构造实例化对象
+        /* let Person = (name,age) => {
+            this.name = name;
+            this.age = age;
+        }
+        let me = new Person('xiao',30);
+        console.log(me); */
+
+        // 3.不能使用arguments变量来保存实参
+        /* let fn = ()=>{
+            console.log(arguments);
+        }
+        fn(1,2,3); */
+
+        /* 
+            4.箭头函数的简写
+                1) 省略小括号，当形参值有一个
+                let add = n => {
+                    return n + n;
+                }
+                console.log(add(9));
+                2) 省略花括号，当代马体只有一条语句时，return 语句
+                必须省略，而且语句的执行结果就是函数的返回值。
+        */
+       let pow = n => n*n;
+       console.log(pow(9));
+    </script>
+</body>
+</html>
+```
+
