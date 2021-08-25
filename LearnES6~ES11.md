@@ -465,5 +465,125 @@ console.log(c);
 </html>
 ```
 
+### Symbol
 
+#### 1.Symbol的基本使用
+
+​	ES6 引入了一种新的原始数据类型**Symbol**，**表示独一无二的值。**它是 JavaScript 语言的第七种数据类型， 前六种是：**undefined**、**null**、**布尔值（Boolean）**、**字符串（String）**、**数值（Number）**、**对象（Object）**。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            /* 
+                ES6 引入了一种新的原始数据类型Symbol，表示独一无二的值。它是 JavaScript 语言的第七种数据类型，
+                前六种是：undefined、null、布尔值（Boolean）、字符串（String）、数值（Number）、对象（Object）。
+            */
+
+            // 通过symbol函数创建symbol
+            let s = Symbol("");
+            console.log(s, typeof s);
+
+            let s2 = Symbol("o((>ω< ))o");
+            console.log(s2);
+            let s3 = Symbol("o((>ω< ))o");
+            console.log(s3);
+            console.log(s2 === s3);  // false
+
+
+            let a1 = Symbol.for('foo');
+            let a2 = Symbol.for('foo');
+
+            console.log(a1 === a2);  // true
+
+            // 上面代码中，s1和s2都是 Symbol 值，但是它们都是由同样参数的Symbol.for方法生成的，所以实际上是同一个值。
+            /* 
+                Symbol.for()与Symbol()这两种写法，都会生成新的 Symbol。
+                它们的区别是，前者会被登记在全局环境中供搜索，后者不会。
+                Symbol.for()不会每次调用就返回一个新的 Symbol 类型的值，
+                而是会先检查给定的key是否已经存在，如果不存在才会新建一个值。
+                比如，如果你调用Symbol.for("cat")30 次，每次都会返回同一个 
+                Symbol 值，但是调用Symbol("cat")30 次，会返回 30 个不同的 
+                Symbol 值。
+            */
+
+            // symbol 不能与其他数据进行运算
+
+            // USONB you are so niubility  巧记javascript数据类型
+            /* 
+                u undefined
+                s string symbolo 
+                o object
+                n null number
+                b boolean
+            */
+        </script>
+    </body>
+</html>
+
+```
+
+#### 2.Symbol创建对象属性
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 向对象中添加方法 up down
+        let game = {
+            up: function () {
+                console.log("↑");
+            },
+            down: () => {
+                console.log("↓");
+            } 
+        }
+
+        let methods = {
+            up: Symbol(),
+            down: Symbol()
+        };
+
+        game[methods.up] = function () {
+            console.log("我可以改变形状");
+        }
+
+        game[methods.down] = function () {
+            console.log("我可以快速下降");
+        }
+
+        console.log(game);
+
+
+        // 第二种创建方式
+        let youxi = {
+            name: '狼人杀',
+            [Symbol('say')]: function () {
+                console.log("我可以发言");
+            },
+
+            [Symbol('zibao')]: function () {
+                console.log("自爆");
+            }
+        }
+
+        console.log(youxi);
+    </script>
+</body>
+</html>
+```
 
