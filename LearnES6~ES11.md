@@ -389,3 +389,81 @@ ES6允许按照一定模式从**数组**和**对象**中**提取值**，对变�
 </html>
 ```
 
+### spread扩展运算符
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // ... 扩展运算符能将数组转换为逗号分隔的参数序列
+        const arr = ['a','b','c'];
+
+        function chuanwan() {
+            console.log(arguments);
+        }
+
+        chuanwan(...arr); // 相当于  chuanwan('a','b','c');
+    </script>
+</body>
+</html>
+```
+
+用法：
+
+1. 数组的合并
+
+```js
+const arr = ['a','b'];
+const arr1 = ['c','d'];
+
+const arr2 = arr.concat(arr1);
+
+console.log(arr2);
+
+const arr3 = [...arr,...arr1];
+console.log(arr3);
+```
+
+2. 数组的克隆
+
+```js
+const b = ['1','2','3'];
+const c = [...b];
+console.log(c);
+```
+
+3. 将伪数组转为正常的数组
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <script>
+        // 3.将伪数组转为正的数组
+        const divs = document.querySelectorAll("div");
+        const ab = [...divs];
+        console.log(ab);
+    </script>
+</body>
+</html>
+```
+
+
+
