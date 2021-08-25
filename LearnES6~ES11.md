@@ -351,3 +351,41 @@ ES6允许按照一定模式从**数组**和**对象**中**提取值**，对变�
 </html>
 ```
 
+### rest参数
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // es6引入rest参数，用于获取函数的实参，用来代替arguments
+        // es5 获取实参的方式
+        function date() {
+            console.log(arguments);
+        }
+        date('a','b','c');
+
+        // rest参数获取实参
+        function date1(...args) {
+            console.log(args);
+        }
+        date1('1','2','3');
+
+        // rest参数在有形参的情况下，必须放在后面
+        function fn(a,b,...args) {
+            console.log(a);
+            console.log(b);
+            console.log(args);
+        }
+        fn(1,2,3,4,5,6,7);
+    </script>
+</body>
+</html>
+```
+
