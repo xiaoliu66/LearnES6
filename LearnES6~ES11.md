@@ -311,3 +311,43 @@ ES6允许按照一定模式从**数组**和**对象**中**提取值**，对变�
 </html>
 ```
 
+### 参数默认值
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // es6允许给函数参数赋初始值
+        // 1. 形参初始值，具有默认的参数，一般位置要靠后（潜规则）
+        function add(a,b,c=10) {
+            return a+b+c;
+        }
+
+        console.log(add(1,2));
+
+        // 2.与解构赋值相结合
+        function connect({host="127.0.0.1",username,password,port}) {
+            console.log(host);
+            console.log(username);
+            console.log(password);
+            console.log(port);
+        }
+
+        connect({
+            host:'www.baidu.com',
+            username:'root',
+            password:'root',
+            port:3306
+        })
+    </script>
+</body>
+</html>
+```
+
