@@ -587,3 +587,37 @@ console.log(c);
 </html>
 ```
 
+#### 3.Symbol内置属性
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            Symbol.hasInstance对象的Symbol.hasInstance属性，指向一个内部方法。
+            当其他对象使用instanceof运算符，判断是否为该对象的实例时，
+            会调用这个方法。比如，foo instanceof Foo在语言内部，
+            实际调用的是Foo[Symbol.hasInstance](foo)。
+            https://es6.ruanyifeng.com/#docs/symbol#%E5%86%85%E7%BD%AE%E7%9A%84-Symbol-%E5%80%BC
+        */
+        class Person {
+            static [Symbol.hasInstance](param) {
+                console.log(param);
+                console.log('监测类型');
+                return true;
+            }
+        }
+        let o = {}
+        console.log(o instanceof Person);
+    </script>
+</body>
+</html>
+```
+
