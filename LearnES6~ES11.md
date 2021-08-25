@@ -621,3 +621,41 @@ console.log(c);
 </html>
 ```
 
+### Iterator迭代器
+
+Iterator 的作用有三个：一是为各种数据结构，提供一个统一的、简便的访问接口；二是使得数据结构的成员能够按某种次序排列；三是 ES6 创造了一种新的遍历命令`for...of`循环，Iterator 接口主要供`for...of`消费。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const arr = [1,2,3,4,5,6]
+
+        // 使用for...of遍历数组
+       /*  for(let v of arr) {
+            console.log(v);
+        } */
+
+
+        let iterator = arr[Symbol.iterator]();
+        console.log(iterator);
+
+        console.log(iterator.next()); // { value: "1", done: false }
+        console.log(iterator.next()); // { value: "2", done: false }
+        console.log(iterator.next()); // { value: "3", done: false }
+        console.log(iterator.next()); // { value: "4", done: false }
+        console.log(iterator.next()); // { value: "5", done: false }
+        console.log(iterator.next()); // { value: "6", done: false }
+        console.log(iterator.next()); // { value: undefined, done: t }
+    </script>
+</body>
+</html>
+```
+
