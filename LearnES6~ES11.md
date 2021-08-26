@@ -659,3 +659,45 @@ Iterator 的作用有三个：一是为各种数据结构，提供一个统一�
 </html>
 ```
 
+迭代器自定义遍历对象
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            const banji = {
+                name: "xxxx",
+                stus: ["a", "b", "c", "d"],
+                [Symbol.iterator]() {
+                    let index = 0;
+                    let _this = this;
+                    return {
+                        next: function () {
+                            if (index < _this.stus.length) {
+                                const result = { value: _this.stus[index], done: false };
+                                index++;
+                                return result;
+                            } else {
+                                return { value: undefined, done: true };
+                            }
+                        },
+                    };
+                },
+            };
+
+            for (let v of banji) {
+                console.log(v);
+            }
+        </script>
+    </body>
+</html>
+
+```
+
