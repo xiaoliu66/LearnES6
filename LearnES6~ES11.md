@@ -703,6 +703,8 @@ Iterator 的作用有三个：一是为各种数据结构，提供一个统一�
 
 ### Generator函数
 
+#### 简介
+
 > Generator 函数有多种理解角度。语法上，首先可以把它理解成，**Generator 函数是一个状态机，封装了多个内部状态。**
 >
 > 执行 Generator 函数会**返回一个遍历器对象**，也就是说，Generator 函数除了状态机，还是一个遍历器对象生成函数。返回的遍历器对象，可以依次遍历 Generator 函数内部的每一个状态。
@@ -767,7 +769,7 @@ hw.next()
         // console.log(iterator);
         // 生成器函数 调用
        /*  console.log(iterator.next()); // {value: a, done: false}
-        iterator.next(); // 不用console.log输出是不显示
+        iterator.next(); // 不用console.log输出是不显示值的
         iterator.next();
         iterator.next(); */
 
@@ -775,6 +777,64 @@ hw.next()
         for(let v of get()) {
             console.log(v);
         }
+    </script>
+</body>
+</html>
+```
+
+#### Generator传递参数
+
+**`yield`表达式本身没有返回值，或者说总是返回`undefined`。**`next`方法可以带一个参数，该参数就会被当作上一个`yield`表达式的返回值。
+
+```javascript
+function* f() {
+  for(var i = 0; true; i++) {
+    var reset = yield i;
+    if(reset) { i = -1; }
+  }
+}
+
+var g = f();
+
+g.next() // { value: 0, done: false }
+g.next() // { value: 1, done: false }
+g.next(true) // { value: 0, done: false }
+```
+
+上面代码先定义了一个可以无限运行的 Generator 函数`f`，如果`next`方法没有参数，每次运行到`yield`表达式，变量`reset`的值总是`undefined`。当`next`方法带一个参数`true`时，变量`reset`就被重置为这个参数（即`true`），因此`i`会等于`-1`，下一轮循环就会从`-1`开始递增。
+
+这个功能有很重要的语法意义。Generator 函数从暂停状态到恢复运行，它的上下文状态（context）是不变的。通过`next`方法的参数，就有办法在 Generator 函数开始运行之后，继续向函数体内部注入值。**也就是说，可以在 Generator 函数运行的不同阶段，从外部向内部注入不同的值，从而调整函数行为。**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function * gen(args) {
+            console.log(args); // AAA   1
+            let one = yield 111;
+            console.log(one); // B  3
+
+            let two = yield 222;
+            console.log(two); // C 
+
+            let three = yield 333;
+            console.log(three); // D
+        }
+
+
+        let it = gen('AAA');  // 程序执行完这段代码是没有输出任何值的,只有调用next()才会执行方法。
+        console.log(it.next()); // {value:111, done:false}  2
+        console.log(it.next('B')); // {value:222, done:false}  4
+        console.log(it.next('C')); // {value:333,done:false}
+        console.log(it.next('D')); // {value:undefined,done:true}
+
     </script>
 </body>
 </html>
