@@ -822,19 +822,84 @@ g.next(true) // { value: 0, done: false }
             console.log(one); // B  3
 
             let two = yield 222;
-            console.log(two); // C 
+            console.log(two); // C  5
 
             let three = yield 333;
-            console.log(three); // D
+            console.log(three); // D  7
         }
 
 
         let it = gen('AAA');  // 程序执行完这段代码是没有输出任何值的,只有调用next()才会执行方法。
         console.log(it.next()); // {value:111, done:false}  2
         console.log(it.next('B')); // {value:222, done:false}  4
-        console.log(it.next('C')); // {value:333,done:false}
-        console.log(it.next('D')); // {value:undefined,done:true}
+        console.log(it.next('C')); // {value:333,done:false}  6
+        console.log(it.next('D')); // {value:undefined,done:true}  8
 
+    </script>
+</body>
+</html>
+```
+
+#### Generator函数实例-1
+
+用来解决回调地狱
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 异步编程 文件操作 网络操作（ajax request）数据库操作
+        // 1s 后控制输出111  2s后输出222  3s后输出333
+        // 回调地狱
+        /* setTimeout(() => {
+            console.log(111);
+            setTimeout(() => {
+                console.log(222);
+                setTimeout(() => {
+                    console.log(333);
+                }, 3000);
+            }, 2000);
+        }, 1000); */
+
+        function one() {
+            setTimeout(() => {
+                let now = new Date();
+                console.log(111,now);
+                it.next();
+            }, 1000);
+        }
+
+        function two() {
+            setTimeout(() => {
+                let now = new Date();
+                console.log(222,now);
+                it.next();
+            }, 2000);
+        }
+
+        function three() {
+            setTimeout(() => {
+                let now = new Date();
+                console.log(333,now);
+                it.next();
+            }, 3000);
+        }
+
+        function * gen () {
+            yield one();
+            yield two();
+            yield three();
+        }
+
+        let it = gen();
+        it.next();
     </script>
 </body>
 </html>
