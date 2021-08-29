@@ -905,3 +905,54 @@ g.next(true) // { value: 0, done: false }
 </html>
 ```
 
+#### Generator函数实例-2
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            function getUsers() {
+                setTimeout(() => {
+                    let data = "用户数据";
+                    it.next(data);
+                }, 1000);
+            }
+
+            function getOrders() {
+                setTimeout(() => {
+                    let data = "订单数据";
+                    it.next(data);
+                }, 1000);
+            }
+
+            function getGoods() {
+                setTimeout(() => {
+                    let data = "商品数据";
+                    it.next(data);
+                }, 1000);
+            }
+
+            function* gen() {
+                let users = yield getUsers();
+                console.log(users);
+                let orders = yield getOrders();
+                console.log(orders);
+                let goods = yield getGoods();
+                console.log(goods);
+            }
+
+            let it = gen();
+            it.next();
+        </script>
+    </body>
+</html>
+
+```
+
