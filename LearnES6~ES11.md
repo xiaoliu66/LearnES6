@@ -1114,3 +1114,66 @@ p.then((resp) => {
 
 ```
 
+#### Promise.prototype.then() 
+
+> Promise 实例具有`then`方法，也就是说，`then`方法是定义在原型对象`Promise.prototype`上的。它的作用是为 Promise 实例添加状态改变时的回调函数。
+>
+> `then`方法返回的是一个新的`Promise`实例（注意，不是原来那个`Promise`实例）。因此可以采用链式写法，即`then`方法后面再调用另一个`then`方法。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            const p = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve("用户数据");
+                }, 1000);
+            });
+
+            // 调用then方法  then方法的返回结果是Promise对象，对象状态由回调函数的执行结果决定。
+            // 1.如果回调函数中返回的结果是非Promise类型的属性，状态为成功，
+            // 返回值为对象的成功的值
+            const result = p.then(
+                (resp) => {
+                    console.log(resp);
+                    // 1.非Promise类型的属性
+                    // return "okkkkkk";
+
+                    /* 
+                        2.是promise对象，这个Promise对象的返回值决定者外层
+                        promise对象是否成功
+                    */
+                    return new Promise((resolve, reject) => {
+                        //    resolve('ok')
+                        reject("err");
+                    });
+
+                    // 3.抛出错误
+                    throw new Error("出错了！");
+                },
+                (err) => {
+                    console.log(err);
+                }
+            );
+
+            //链式调用  来改变回调地狱的写法
+            p.then(()=>{
+
+            }).then(()=>{
+
+            })
+
+            console.log(result);
+        </script>
+    </body>
+</html>
+
+```
+
