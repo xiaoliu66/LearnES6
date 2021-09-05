@@ -1269,3 +1269,13 @@ p.then((value) => {
 > ```
 >
 > 上面代码中，不管`promise`最后的状态，在执行完`then`或`catch`指定的回调函数以后，都会执行`finally`方法指定的回调函数。
+>
+> ```javascript
+> server.listen(port)
+>   .then(function () {
+>     // ...
+>   })
+>   .finally(server.stop);
+> ```
+>
+> `finally`方法的回调函数不接受任何参数，这意味着没有办法知道，前面的 Promise 状态到底是`fulfilled`还是`rejected`。这表明，`finally`方法里面的操作，应该是与状态无关的，不依赖于 Promise 的执行结果。
