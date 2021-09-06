@@ -1279,3 +1279,33 @@ p.then((value) => {
 > ```
 >
 > `finally`方法的回调函数不接受任何参数，这意味着没有办法知道，前面的 Promise 状态到底是`fulfilled`还是`rejected`。这表明，`finally`方法里面的操作，应该是与状态无关的，不依赖于 Promise 的执行结果。
+
+### Set
+
+ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。
+
+`Set`本身是一个构造函数，用来生成 Set 数据结构。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let s = new Set();
+        let s2 = new Set(['a','b','b','c','d']);
+        console.log(s2);
+        s2.add('1');
+        s2.delete('a');
+        console.log(s2.has('1'));
+        s2.clear();
+    </script>
+</body>
+</html>
+```
+
