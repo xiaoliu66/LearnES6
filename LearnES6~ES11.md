@@ -1347,3 +1347,45 @@ ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都
 </html>
 ```
 
+### Map
+
+> ES6 提供了 Map 数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            let map = new Map();
+            map.set("name", "xiaoming");
+            map.set("fun", () => {
+                console.log("函数");
+            });
+
+            let key = {
+                school: "xxxx",
+            };
+            map.set(key,['a','b','c'])
+
+            console.log(map);
+            console.log(map.get('name'));
+            console.log(map.get('fun'));
+
+            map.delete('name')
+            
+            // 遍历
+            for(let v of map) {
+                console.log(v);
+            }
+        </script>
+    </body>
+</html>
+
+```
+
