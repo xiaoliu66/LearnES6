@@ -1286,6 +1286,8 @@ ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都
 
 `Set`本身是一个构造函数，用来生成 Set 数据结构。
 
+#### Set 基础用法
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -1304,6 +1306,42 @@ ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都
         s2.delete('a');
         console.log(s2.has('1'));
         s2.clear();
+    </script>
+</body>
+</html>
+```
+
+#### Set 集合实践
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = [1,2,3,3,4,4,5,5]
+        // 1.去重
+        /* let result = new Set(arr);
+        console.log(result); */
+
+        // 2.交集
+        let arr2 = [4,5,6,7,8]
+        /* let result = [...new Set(arr)].filter(item => new Set(arr2).has(item))
+        console.log(result); */
+
+        // 3.并集
+        /* let union = [...arr,...arr2]
+        let result = new Set(union)
+        console.log(result); */
+
+        // 4.差集
+        let result = [...new Set(arr)].filter(item=> !new Set(arr2).has(item));
+        console.log(result);
     </script>
 </body>
 </html>
