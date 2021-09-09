@@ -1553,3 +1553,46 @@ ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都
 </html>
 ```
 
+### ES6-模块化
+
+#### 1. export命令
+
+> 模块功能主要由两个命令构成：`export`和`import`。`export`命令用于规定模块的对外接口，`import`命令用于输入其他模块提供的功能。
+>
+> 一个模块就是一个独立的文件。该文件内部的所有变量，外部无法获取。如果你希望外部能够读取模块内部的某个变量，就必须使用`export`关键字输出该变量。
+
+暴露有三种方式
+
+**1.分别暴露**
+
+```javascript
+export let school = '家里蹲'
+export function play() {
+    console.log('玩游戏')
+}
+```
+
+**2.统一暴露**
+
+```js
+let school = '家里蹲'
+function play() {
+    console.log('玩游戏')
+}
+
+export {school,play}
+```
+
+它与前一种写法是等价的，但是应该优先考虑使用这种写法。因为这样就可以在脚本尾部，一眼看清楚输出了哪些变量。
+
+**3.默认暴露**
+
+```js
+export default {
+    school: '家里蹲',
+    play: function() {
+        console.log('玩游戏')
+    }
+}
+```
+
