@@ -1566,6 +1566,7 @@ ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都
 **1.分别暴露**
 
 ```javascript
+// m1.js
 export let school = '家里蹲'
 export function play() {
     console.log('玩游戏')
@@ -1575,6 +1576,7 @@ export function play() {
 **2.统一暴露**
 
 ```js
+// m2.js
 let school = '家里蹲'
 function play() {
     console.log('玩游戏')
@@ -1588,11 +1590,46 @@ export {school,play}
 **3.默认暴露**
 
 ```js
+// m3.js
 export default {
     school: '家里蹲',
     play: function() {
         console.log('玩游戏')
     }
 }
+```
+
+#### 2.import命令
+
+使用`export`命令定义了模块的对外接口以后，其他 JS 文件就可以通过`import`命令加载这个模块。
+
+除了指定加载某个输出值，还可以使用整体加载，即用星号（`*`）指定一个对象，所有输出值都加载在这个对象上面。
+
+引入有三种方式
+
+**1.通用引入**
+
+```js
+// 引入m1.js模块的内容
+import * as m1 from './m1.js'
+// 引入m2.js 模块内容
+import * as m2 from "./m2.js"
+// 引入m3.js 模块内容
+import * as m3 from "./m3.js"
+console.log(m3); 
+```
+
+**2.解构赋值形式导入模块**
+
+```js
+import {school,teach} from './ml.js'
+import {school as s,play} from './m2.js'
+import {default as m3} from './m3.js'
+```
+
+**3.简便形式导入只针对默认暴露**
+
+```js
+import play from './m3.js'
 ```
 
