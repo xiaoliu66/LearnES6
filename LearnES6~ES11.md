@@ -1633,3 +1633,33 @@ import {default as m3} from './m3.js'
 import play from './m3.js'
 ```
 
+## ES7
+
+### feature
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // includes
+        const books = ['西游记','红楼梦','三国演义','水浒传'];
+
+        // 判断
+        console.log(books.includes('西游记'));
+        console.log(books.includes('三体'));
+
+        // ** 
+        console.log(2 ** 10);
+        console.log(Math.pow(2,10));
+    </script>
+</body>
+</html>
+```
+
