@@ -1663,3 +1663,58 @@ import play from './m3.js'
 </html>
 ```
 
+### async
+
+> ES2017 标准引入了 async 函数，使得异步操作变得更加方便。async 函数是什么？一句话，它就是 Generator 函数的语法糖。
+>
+> 一比较就会发现，`async`函数就是将 Generator 函数的星号（`*`）替换成`async`，将`yield`替换成`await`，仅此而已。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            /* 
+                ES2017 标准引入了 async 函数，使得异步操作变得更加方便。
+                async 函数是什么？一句话，它就是 Generator 函数的语法糖。
+            */
+            // async函数 会返回一个Promise对象
+            async function fn() {
+                // return 'xxx';
+                /* 
+                如果返回的结果不是一个promise类型的对象，则会返回一个Promise并且状态是成功的。
+            */
+                //    return;
+                // throw new Error('出错了'); // 返回的结果是一个失败的Promise
+
+                // 返回的结果是一个Promise对象，则返回这个Promise对象状态的决定着async的状态
+                return new Promise((resolve, reject) => {
+                    // resolve('xxx')
+                    reject("！！！");
+                });
+            }
+
+            const result = fn();
+
+            result.then(
+                (value) => {
+                    console.log(value);
+                },
+                (err) => {
+                    console.warn(err);
+                }
+            );
+
+            // console.log(result);
+        </script>
+    </body>
+</html>
+
+```
+
