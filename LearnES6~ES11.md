@@ -1718,3 +1718,59 @@ import play from './m3.js'
 
 ```
 
+### await 命令
+
+> 正常情况下，`await`命令后面是一个 Promise 对象，返回该对象的结果。如果不是 Promise 对象，就直接返回对应的值。
+
+**await命令要放入async语句中。**
+
+```js
+// 1.直接返回对应的值
+
+async function f() {
+  // 等同于
+  // return 123;
+  return await 123;
+}
+
+f().then(v => console.log(v))
+// 123
+```
+
+```html
+// 2.返回一个Promise对象
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            const p = new Promise((resolve, reject) => {
+                // resolve('success')
+                reject("失败了");
+            });
+
+            // await 要放在async函数中
+            async function main() {
+                try {
+                    let result = await p;
+                    console.log(result);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+            main();
+        </script>
+    </body>
+</html>
+
+```
+
+### 使用注意点
+
