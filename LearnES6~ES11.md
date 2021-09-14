@@ -1772,7 +1772,7 @@ f().then(v => console.log(v))
 
 ```
 
-### await 使用注意点
+#### await 使用注意点
 
 1.`await`命令后面的`Promise`对象，运行结果可能是`rejected`，所以最好把`await`命令放在`try...catch`代码块中。
 
@@ -1798,7 +1798,7 @@ async function myFunction() {
 2.多个`await`命令后面的异步操作，如果不存在继发关系，最好让它们同时触发。
 
 ```javascript
-et foo = await getFoo();
+let foo = await getFoo();
 let bar = await getBar();
 ```
 
@@ -1840,3 +1840,46 @@ function dbFuc(db) { //这里不需要 async
   });
 }
 ```
+
+#### async和await结合读取文件
+
+```js
+// 引入fs模块
+const fs = require("fs");
+
+// 读取第一个文件
+function readFirst() {
+    return new Promise((resolve, reject) => {
+        fs.readFile("./1-asyn.html", (err, data) => {
+            if (err) {
+                reject(err)
+            }
+            resolve(data);
+        })
+    })
+}
+
+function readSecond() {
+    return new Promise((resolve, reject) => {
+        fs.readFile("./2-await.html", (err, data) => {
+            if (err) {
+                reject(err)
+            }
+            resolve(data);
+        })
+    })
+}
+
+async function main() {
+    let first = await readFirst();
+    let second = await readSecond();
+
+    console.log(first);
+    console.log(second);
+
+}
+
+main();
+
+```
+
