@@ -1633,7 +1633,7 @@ import {default as m3} from './m3.js'
 import play from './m3.js'
 ```
 
-## ES7
+## ES7~ES8
 
 ### feature
 
@@ -1929,6 +1929,34 @@ main();
         }
 
         main();
+    </script>
+</body>
+</html>
+```
+
+### 对象方法扩展
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const school = {
+            name: 'xxx',
+            cities: ['北京','上海','深圳'],
+            xueke: ['前端','Java','大数据','运维']
+        }
+
+        /* console.log(Object.keys(school));
+        console.log(Object.values(school));
+        console.log(Object.entries(school)); */
+        console.log(Object.getOwnPropertyDescriptors(school));
     </script>
 </body>
 </html>
