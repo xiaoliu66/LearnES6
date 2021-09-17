@@ -1962,3 +1962,57 @@ main();
 </html>
 ```
 
+## ES9
+
+### 对象展开
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function connect({host,port, ...user}) {
+            console.log(host);
+            console.log(port);
+            console.log(user);
+        }
+
+        connect({
+            host: 'localhost',
+            port: 3306,
+            username: 'root',
+            password: 'root',
+            type: 'master'
+        });
+
+        const one = {
+            one: '1'
+        }
+
+        const two = {
+            two: '1'
+        }
+
+        const three = {
+            three: '1'
+        }
+
+        const four = {
+            four: '1'
+        }
+
+        const aaa = {...one,...two,...three,...four}
+        console.log(aaa);
+    </script>
+</body>
+</html>
+```
+
+
+
