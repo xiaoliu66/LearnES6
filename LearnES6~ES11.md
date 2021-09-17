@@ -2014,5 +2014,37 @@ main();
 </html>
 ```
 
+### 正则命名分组
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* let str = '<a href ="http://www.baidu.com">百度</a>'
+        // 提取url与标签文本
+        const reg = /<a href ="(.*)">(.*)<\/a>/;
+        const result = reg.exec(str);
+
+        console.log(result);
+        console.log(result[1]);
+        console.log(result[2]); */
+
+        let str = '<a href ="http://www.baidu.com">百度</a>';
+        const reg = /<a href ="(?<url>.*)">(?<text>.*)<\/a>/;
+        const result = reg.exec(str);
+        console.log(result);
+
+    </script>
+</body>
+</html>
+```
+
 
 
