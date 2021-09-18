@@ -2048,3 +2048,36 @@ main();
 
 
 
+## ES10
+
+### Object.fromEntries
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 将二维数组转化为对象
+        const result = Object.fromEntries([
+            ['name','aaa'],
+            ['xueke','Java']
+        ])
+        console.log(result);
+
+        // 将对象转化为二维数组
+        const arr = Object.entries({
+            name: 'aaa',
+            age: 20
+        })
+        console.log(arr);
+    </script>
+</body>
+</html>
+```
+
