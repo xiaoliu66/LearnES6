@@ -2103,3 +2103,32 @@ main();
 </html>
 ```
 
+### Array.prototype.flat与flatMap
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // flat 将多维数组转化为低维数组
+        // const arr = [1,2,3,4,[5,6]];
+        // const arr = [1,2,3,4,[5,6,[7,8,9]]];
+        // 参数为深度 为数字
+        // console.log(arr.flat(2));
+
+        //flatMap 
+        const arr = [1,2,3,4]
+        // const result = arr.map(item => [item * 10])
+        const result = arr.flatMap(item => [item * 10])
+        console.log(result);
+    </script>
+</body>
+</html>
+```
+
