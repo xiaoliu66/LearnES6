@@ -19,7 +19,7 @@
         let sum = fn(2,3);
         console.log(sum); */
 
-        // 1.this是静态的，this始终指向函数声明时所在作用域下的this的值
+        // 1.箭头函数的this是静态的，箭头函数的this始终指向函数声明时所在作用域下的this的值
         function getName() {
             console.log(this.name);
         }
@@ -37,8 +37,8 @@
         getName2();
 
         // call方法调用
-        getName.call(school);
-        getName2.call(school);
+        getName.call(school); // 普通函数的this 是谁调用函数 this就指向谁。 所以这个函数的this指向传过来的对象。
+        getName2.call(school); // 虽然传了一个对象，但是这个箭头函数声明时是在windows对象下面的。
 
         // 2.不能作为构造实例化对象
         /* let Person = (name,age) => {

@@ -21,6 +21,15 @@
         let app = document.getElementById("root");
         // 绑定事件
         app.addEventListener("click", function() {
+
+            /* // 最开始出错版本
+            setTimeout(function() {
+                // 定时器的this指向windows,所以此时这里的this指向windows，但是windows对象米有sytle属性就报错了。
+                console.log(this); 
+                this.style.background = 'pink';
+            }, 2000); */
+
+
             // 保存this的值
             /* let self= this;
 
@@ -30,7 +39,7 @@
 
             // 是用箭头函数
             setTimeout(() => {
-                // 此处的this是指向事件源的
+                // 此处的this是指向事件源app
                 this.style.background = 'pink';
             }, 2000);
         })
@@ -52,12 +61,15 @@
             箭头函数不适合与this有关的回调，事件回调,对象的方法。
         */
 
-        {
+        /* {
             name: '小明',
+            getName: function () {
+                this.name  // 此时this指向这个js对象
+            }
             getName: () => {
-                this.name // 此时this指向window
-            },
-        }
+                this.name // 此时this指向外层的window
+            }
+        } */
     </script>
 </body>
 </html>

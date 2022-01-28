@@ -83,7 +83,7 @@ ES6允许按照一定模式从**数组**和**对象**中**提取值**，对变�
         console.log(name);
         console.log(age);
         console.log(z);
-        
+      
         z();
     </script>
 </body>
@@ -111,9 +111,9 @@ ES6允许按照一定模式从**数组**和**对象**中**提取值**，对变�
         // 2.内容中可以直接出现换行符
         let str1 = `
             <ul>
-                <li>1</li>    
-                <li>2</li>    
-                <li>3</li>    
+                <li>1</li>  
+                <li>2</li>  
+                <li>3</li>  
             </ul>
         `;
 
@@ -184,7 +184,7 @@ ES6允许按照一定模式从**数组**和**对象**中**提取值**，对变�
     <script>
         // 声明一个函数
         /* let fn = function () {
-            
+      
         } */
 
         /* let fn = (a,b) => {
@@ -193,7 +193,7 @@ ES6允许按照一定模式从**数组**和**对象**中**提取值**，对变�
         let sum = fn(2,3);
         console.log(sum); */
 
-        // 1.this是静态的，this始终指向函数声明时所在作用域下的this的值
+        // 1.箭头函数的this是静态的，箭头函数的this始终指向函数声明时所在作用域下的this的值
         function getName() {
             console.log(this.name);
         }
@@ -211,8 +211,8 @@ ES6允许按照一定模式从**数组**和**对象**中**提取值**，对变�
         getName2();
 
         // call方法调用
-        getName.call(school);
-        getName2.call(school);
+        getName.call(school); // 普通函数的this 是谁调用函数 this就指向谁。 所以这个函数的this指向传过来的对象。
+        getName2.call(school); // 虽然传了一个对象，但是这个箭头函数声明时是在windows对象下面的。
 
         // 2.不能作为构造实例化对象
         /* let Person = (name,age) => {
@@ -269,6 +269,15 @@ ES6允许按照一定模式从**数组**和**对象**中**提取值**，对变�
         let app = document.getElementById("root");
         // 绑定事件
         app.addEventListener("click", function() {
+
+	/* // 最开始出错版本
+            setTimeout(function() {
+                // 定时器的this指向windows,所以此时这里的this指向windows，但是windows对象米有sytle属性就报错了。
+                console.log(this); 
+                this.style.background = 'pink';
+            }, 2000); */
+
+
             // 保存this的值
             /* let self= this;
 
@@ -278,7 +287,7 @@ ES6允许按照一定模式从**数组**和**对象**中**提取值**，对变�
 
             // 是用箭头函数
             setTimeout(() => {
-                // 此处的this是指向事件源的
+                // 此处的this是指向事件源app
                 this.style.background = 'pink';
             }, 2000);
         })
@@ -300,12 +309,15 @@ ES6允许按照一定模式从**数组**和**对象**中**提取值**，对变�
             箭头函数不适合与this有关的回调，事件回调,对象的方法。
         */
 
-        {
+        /* {
             name: '小明',
-            getName () => {
-                this.name // 此时this指向window
-            },
-        }
+            getName: function () {
+                this.name  // 此时this指向这个js对象
+            }
+            getName: () => {
+                this.name // 此时this指向外层的window
+            }
+        } */
     </script>
 </body>
 </html>
@@ -469,7 +481,7 @@ console.log(c);
 
 #### 1.Symbol的基本使用
 
-​	ES6 引入了一种新的原始数据类型**Symbol**，**表示独一无二的值。**它是 JavaScript 语言的第七种数据类型， 前六种是：**undefined**、**null**、**布尔值（Boolean）**、**字符串（String）**、**数值（Number）**、**对象（Object）**。
+    ES6 引入了一种新的原始数据类型**Symbol**，**表示独一无二的值。**它是 JavaScript 语言的第七种数据类型， 前六种是：**undefined**、**null**、**布尔值（Boolean）**、**字符串（String）**、**数值（Number）**、**对象（Object）**。
 
 ```html
 <!DOCTYPE html>
@@ -623,7 +635,7 @@ console.log(c);
 
 ### Iterator迭代器
 
-Iterator 的作用有三个：一是为各种数据结构，提供一个统一的、简便的访问接口；二是使得数据结构的成员能够按某种次序排列；三是 ES6 创造了一种新的遍历命令`for...of`循环，Iterator 接口主要供`for...of`消费。
+Iterator 的作用有三个：一是为各种数据结构，提供一个统一的、简便的访问接口；二是使得数据结构的成员能够按某种次序排列；三是 ES6 创造了一种新的遍历命令 `for...of`循环，Iterator 接口主要供 `for...of`消费。
 
 ```html
 <!DOCTYPE html>
@@ -663,7 +675,7 @@ Iterator 的作用有三个：一是为各种数据结构，提供一个统一�
 
 > 一种数据结构只要部署了 Iterator 接口，我们就称这种数据结构是“可遍历的”（iterable）。
 >
-> ES6 规定，默认的 Iterator 接口部署在数据结构的`Symbol.iterator`属性，或者说，一个数据结构只要具有`Symbol.iterator`属性，就可以认为是“可遍历的”（iterable）。`Symbol.iterator`属性本身是一个函数，就是当前数据结构默认的遍历器生成函数。执行这个函数，就会返回一个遍历器。至于属性名`Symbol.iterator`，它是一个表达式，返回`Symbol`对象的`iterator`属性，这是一个预定义好的、类型为 Symbol 的特殊值，所以要放在方括号内.
+> ES6 规定，默认的 Iterator 接口部署在数据结构的 `Symbol.iterator`属性，或者说，一个数据结构只要具有 `Symbol.iterator`属性，就可以认为是“可遍历的”（iterable）。`Symbol.iterator`属性本身是一个函数，就是当前数据结构默认的遍历器生成函数。执行这个函数，就会返回一个遍历器。至于属性名 `Symbol.iterator`，它是一个表达式，返回 `Symbol`对象的 `iterator`属性，这是一个预定义好的、类型为 Symbol 的特殊值，所以要放在方括号内.
 
 ```html
 <!DOCTYPE html>
@@ -713,7 +725,7 @@ Iterator 的作用有三个：一是为各种数据结构，提供一个统一�
 >
 > 执行 Generator 函数会**返回一个遍历器对象**，也就是说，Generator 函数除了状态机，还是一个遍历器对象生成函数。返回的遍历器对象，可以依次遍历 Generator 函数内部的每一个状态。
 >
-> 形式上，Generator 函数是一个普通函数，但是有两个特征。一是，`function`关键字与函数名之间有一个星号；二是，函数体内部使用`yield`表达式，定义不同的内部状态（`yield`在英语里的意思就是“产出”）。
+> 形式上，Generator 函数是一个普通函数，但是有两个特征。一是，`function`关键字与函数名之间有一个星号；二是，函数体内部使用 `yield`表达式，定义不同的内部状态（`yield`在英语里的意思就是“产出”）。
 
 ```js
 function* helloWorldGenerator() {
@@ -725,11 +737,11 @@ function* helloWorldGenerator() {
 var hw = helloWorldGenerator();
 ```
 
-上面代码定义了一个 Generator 函数`helloWorldGenerator`，它内部有两个`yield`表达式（`hello`和`world`），即该函数有三个状态：hello，world 和 return 语句（结束执行）。
+上面代码定义了一个 Generator 函数 `helloWorldGenerator`，它内部有两个 `yield`表达式（`hello`和 `world`），即该函数有三个状态：hello，world 和 return 语句（结束执行）。
 
 然后，Generator 函数的调用方法与普通函数一样，也是在函数名后面加上一对圆括号。不同的是，调用 Generator 函数后，该函数并不执行，返回的也不是函数运行结果，而是一个指向内部状态的指针对象，也就是上一章介绍的遍历器对象（Iterator Object）。
 
-下一步，必须调用遍历器对象的`next`方法，使得指针移向下一个状态。也就是说，每次调用`next`方法，内部指针就从函数头部或上一次停下来的地方开始执行，直到遇到下一个`yield`表达式（或`return`语句）为止。换言之，Generator 函数是分段执行的，`yield`表达式是暂停执行的标记，而`next`方法可以恢复执行。
+下一步，必须调用遍历器对象的 `next`方法，使得指针移向下一个状态。也就是说，每次调用 `next`方法，内部指针就从函数头部或上一次停下来的地方开始执行，直到遇到下一个 `yield`表达式（或 `return`语句）为止。换言之，Generator 函数是分段执行的，`yield`表达式是暂停执行的标记，而 `next`方法可以恢复执行。
 
 ```js
 hw.next()
@@ -788,7 +800,7 @@ hw.next()
 
 #### Generator传递参数
 
-**`yield`表达式本身没有返回值，或者说总是返回`undefined`。**`next`方法可以带一个参数，该参数就会被当作上一个`yield`表达式的返回值。
+**`yield`表达式本身没有返回值，或者说总是返回 `undefined`。**`next`方法可以带一个参数，该参数就会被当作上一个 `yield`表达式的返回值。
 
 ```javascript
 function* f() {
@@ -805,9 +817,9 @@ g.next() // { value: 1, done: false }
 g.next(true) // { value: 0, done: false }
 ```
 
-上面代码先定义了一个可以无限运行的 Generator 函数`f`，如果`next`方法没有参数，每次运行到`yield`表达式，变量`reset`的值总是`undefined`。当`next`方法带一个参数`true`时，变量`reset`就被重置为这个参数（即`true`），因此`i`会等于`-1`，下一轮循环就会从`-1`开始递增。
+上面代码先定义了一个可以无限运行的 Generator 函数 `f`，如果 `next`方法没有参数，每次运行到 `yield`表达式，变量 `reset`的值总是 `undefined`。当 `next`方法带一个参数 `true`时，变量 `reset`就被重置为这个参数（即 `true`），因此 `i`会等于 `-1`，下一轮循环就会从 `-1`开始递增。
 
-这个功能有很重要的语法意义。Generator 函数从暂停状态到恢复运行，它的上下文状态（context）是不变的。通过`next`方法的参数，就有办法在 Generator 函数开始运行之后，继续向函数体内部注入值。**也就是说，可以在 Generator 函数运行的不同阶段，从外部向内部注入不同的值，从而调整函数行为。**
+这个功能有很重要的语法意义。Generator 函数从暂停状态到恢复运行，它的上下文状态（context）是不变的。通过 `next`方法的参数，就有办法在 Generator 函数开始运行之后，继续向函数体内部注入值。**也就是说，可以在 Generator 函数运行的不同阶段，从外部向内部注入不同的值，从而调整函数行为。**
 
 ```html
 <!DOCTYPE html>
@@ -962,13 +974,13 @@ g.next(true) // { value: 0, done: false }
 
 ### Promise
 
-> 所谓`Promise`，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。
+> 所谓 `Promise`，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。
 >
 > `Promise`对象有以下两个特点。
 >
-> （1）对象的状态不受外界影响。`Promise`对象代表一个异步操作，有三种状态：`pending`（进行中）、`fulfilled`（已成功）和`rejected`（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。这也是`Promise`这个名字的由来，它的英语意思就是“承诺”，表示其他手段无法改变。
+> （1）对象的状态不受外界影响。`Promise`对象代表一个异步操作，有三种状态：`pending`（进行中）、`fulfilled`（已成功）和 `rejected`（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。这也是 `Promise`这个名字的由来，它的英语意思就是“承诺”，表示其他手段无法改变。
 >
-> （2）一旦状态改变，就不会再变，任何时候都可以得到这个结果。`Promise`对象的状态改变，只有两种可能：从`pending`变为`fulfilled`和从`pending`变为`rejected`。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果，这时就称为 resolved（已定型）。如果改变已经发生了，你再对`Promise`对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。
+> （2）一旦状态改变，就不会再变，任何时候都可以得到这个结果。`Promise`对象的状态改变，只有两种可能：从 `pending`变为 `fulfilled`和从 `pending`变为 `rejected`。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果，这时就称为 resolved（已定型）。如果改变已经发生了，你再对 `Promise`对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。
 
 #### 基本语法
 
@@ -1118,11 +1130,11 @@ p.then((resp) => {
 
 ```
 
-#### Promise.prototype.then() 
+#### Promise.prototype.then()
 
-> Promise 实例具有`then`方法，也就是说，`then`方法是定义在原型对象`Promise.prototype`上的。它的作用是为 Promise 实例添加状态改变时的回调函数。
+> Promise 实例具有 `then`方法，也就是说，`then`方法是定义在原型对象 `Promise.prototype`上的。它的作用是为 Promise 实例添加状态改变时的回调函数。
 >
-> `then`方法返回的是一个新的`Promise`实例（注意，不是原来那个`Promise`实例）。因此可以采用链式写法，即`then`方法后面再调用另一个`then`方法。
+> `then`方法返回的是一个新的 `Promise`实例（注意，不是原来那个 `Promise`实例）。因此可以采用链式写法，即 `then`方法后面再调用另一个 `then`方法。
 
 ```html
 <!DOCTYPE html>
@@ -1223,7 +1235,7 @@ p.then((value) => {
 
 #### Promise-catch方法
 
-> `Promise.prototype.catch()`方法是`.then(null, rejection)`或`.then(undefined, rejection)`的别名，用于指定发生错误时的回调函数。
+> `Promise.prototype.catch()`方法是 `.then(null, rejection)`或 `.then(undefined, rejection)`的别名，用于指定发生错误时的回调函数。
 >
 > ```javascript
 > getJSON('/posts.json').then(function(posts) {
@@ -1234,7 +1246,7 @@ p.then((value) => {
 > });
 > ```
 >
-> 上面代码中，`getJSON()`方法返回一个 Promise 对象，如果该对象状态变为`resolved`，则会调用`then()`方法指定的回调函数；如果异步操作抛出错误，状态就会变为`rejected`，就会调用`catch()`方法指定的回调函数，处理这个错误。另外，`then()`方法指定的回调函数，如果运行中抛出错误，也会被`catch()`方法捕获。
+> 上面代码中，`getJSON()`方法返回一个 Promise 对象，如果该对象状态变为 `resolved`，则会调用 `then()`方法指定的回调函数；如果异步操作抛出错误，状态就会变为 `rejected`，就会调用 `catch()`方法指定的回调函数，处理这个错误。另外，`then()`方法指定的回调函数，如果运行中抛出错误，也会被 `catch()`方法捕获。
 
 ```html
 <!DOCTYPE html>
@@ -1272,7 +1284,7 @@ p.then((value) => {
 > .finally(() => {···});
 > ```
 >
-> 上面代码中，不管`promise`最后的状态，在执行完`then`或`catch`指定的回调函数以后，都会执行`finally`方法指定的回调函数。
+> 上面代码中，不管 `promise`最后的状态，在执行完 `then`或 `catch`指定的回调函数以后，都会执行 `finally`方法指定的回调函数。
 >
 > ```javascript
 > server.listen(port)
@@ -1282,7 +1294,7 @@ p.then((value) => {
 >   .finally(server.stop);
 > ```
 >
-> `finally`方法的回调函数不接受任何参数，这意味着没有办法知道，前面的 Promise 状态到底是`fulfilled`还是`rejected`。这表明，`finally`方法里面的操作，应该是与状态无关的，不依赖于 Promise 的执行结果。
+> `finally`方法的回调函数不接受任何参数，这意味着没有办法知道，前面的 Promise 状态到底是 `fulfilled`还是 `rejected`。这表明，`finally`方法里面的操作，应该是与状态无关的，不依赖于 Promise 的执行结果。
 
 ### Set
 
@@ -1382,7 +1394,7 @@ ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都
             console.log(map.get('fun'));
 
             map.delete('name')
-            
+          
             // 遍历
             for(let v of map) {
                 console.log(v);
@@ -1557,9 +1569,9 @@ ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都
 
 #### 1. export命令
 
-> 模块功能主要由两个命令构成：`export`和`import`。`export`命令用于规定模块的对外接口，`import`命令用于输入其他模块提供的功能。
+> 模块功能主要由两个命令构成：`export`和 `import`。`export`命令用于规定模块的对外接口，`import`命令用于输入其他模块提供的功能。
 >
-> 一个模块就是一个独立的文件。该文件内部的所有变量，外部无法获取。如果你希望外部能够读取模块内部的某个变量，就必须使用`export`关键字输出该变量。
+> 一个模块就是一个独立的文件。该文件内部的所有变量，外部无法获取。如果你希望外部能够读取模块内部的某个变量，就必须使用 `export`关键字输出该变量。
 
 暴露有三种方式
 
@@ -1601,7 +1613,7 @@ export default {
 
 #### 2.import命令
 
-使用`export`命令定义了模块的对外接口以后，其他 JS 文件就可以通过`import`命令加载这个模块。
+使用 `export`命令定义了模块的对外接口以后，其他 JS 文件就可以通过 `import`命令加载这个模块。
 
 除了指定加载某个输出值，还可以使用整体加载，即用星号（`*`）指定一个对象，所有输出值都加载在这个对象上面。
 
@@ -1667,7 +1679,7 @@ import play from './m3.js'
 
 > ES2017 标准引入了 async 函数，使得异步操作变得更加方便。async 函数是什么？一句话，它就是 Generator 函数的语法糖。
 >
-> 一比较就会发现，`async`函数就是将 Generator 函数的星号（`*`）替换成`async`，将`yield`替换成`await`，仅此而已。
+> 一比较就会发现，`async`函数就是将 Generator 函数的星号（`*`）替换成 `async`，将 `yield`替换成 `await`，仅此而已。
 
 ```html
 <!DOCTYPE html>
@@ -1774,7 +1786,7 @@ f().then(v => console.log(v))
 
 #### await 使用注意点
 
-1.`await`命令后面的`Promise`对象，运行结果可能是`rejected`，所以最好把`await`命令放在`try...catch`代码块中。
+1.`await`命令后面的 `Promise`对象，运行结果可能是 `rejected`，所以最好把 `await`命令放在 `try...catch`代码块中。
 
 ```js
 async function myFunction() {
@@ -1795,14 +1807,14 @@ async function myFunction() {
 }
 ```
 
-2.多个`await`命令后面的异步操作，如果不存在继发关系，最好让它们同时触发。
+2.多个 `await`命令后面的异步操作，如果不存在继发关系，最好让它们同时触发。
 
 ```javascript
 let foo = await getFoo();
 let bar = await getBar();
 ```
 
-上面代码中，`getFoo`和`getBar`是两个独立的异步操作（即互不依赖），被写成继发关系。这样比较耗时，因为只有`getFoo`完成以后，才会执行`getBar`，完全可以让它们同时触发。
+上面代码中，`getFoo`和 `getBar`是两个独立的异步操作（即互不依赖），被写成继发关系。这样比较耗时，因为只有 `getFoo`完成以后，才会执行 `getBar`，完全可以让它们同时触发。
 
 ```javascript
 // 写法一
@@ -1815,7 +1827,7 @@ let foo = await fooPromise;
 let bar = await barPromise;
 ```
 
-3.`await`命令只能用在`async`函数之中，如果用在普通函数，就会报错。
+3.`await`命令只能用在 `async`函数之中，如果用在普通函数，就会报错。
 
 ```javascript
 async function dbFuc(db) {
@@ -1828,7 +1840,7 @@ async function dbFuc(db) {
 }
 ```
 
-上面代码会报错，因为`await`用在普通函数之中了。但是，如果将`forEach`方法的参数改成`async`函数，也有问题。
+上面代码会报错，因为 `await`用在普通函数之中了。但是，如果将 `forEach`方法的参数改成 `async`函数，也有问题。
 
 ```javascript
 function dbFuc(db) { //这里不需要 async
@@ -1912,7 +1924,7 @@ main();
                         }
                     }
                 }
-            })    
+            })  
         }
 
         // promise the方法测试 
@@ -2046,8 +2058,6 @@ main();
 </html>
 ```
 
-
-
 ## ES10
 
 ### Object.fromEntries
@@ -2152,4 +2162,3 @@ main();
 </body>
 </html>
 ```
-
