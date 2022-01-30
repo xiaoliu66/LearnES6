@@ -771,13 +771,17 @@ hw.next()
         // 生成器其实就是一个特殊的函数
         // 异步编程  纯回调函数   node fs ajax mongodb
         function *get() {
-            // yield 作为生成器函数的分隔符
+            // yield 作为生成器函数的分隔符 将下面的代码切分成4个部分。
+            // 第一部分
             console.log("11111");
             yield 'a'; // a
+            // 第二部分
             console.log("22222");
             yield 'b'; // b
+            // 第三部分
             console.log("33333");
-            yield 'c';	/
+            yield 'c';	
+            // 第四部分
             console.log('44444');
         }
 
@@ -847,6 +851,7 @@ g.next(true) // { value: 0, done: false }
 
         let it = gen('AAA');  // 程序执行完这段代码是没有输出任何值的,只有调用next()才会执行方法。
         console.log(it.next()); // {value:111, done:false}  2
+        // next() 方法可以用来传入实参,下面语句传入的参数'B'作为 第一个yield返回的参数.此时one变量就是'B'
         console.log(it.next('B')); // {value:222, done:false}  4
         console.log(it.next('C')); // {value:333,done:false}  6
         console.log(it.next('D')); // {value:undefined,done:true}  8
